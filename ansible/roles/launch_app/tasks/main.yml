@@ -1,0 +1,14 @@
+- name: Launch app container
+  docker_container:
+    name: simple-api
+    image: yellowbobby/tp-devops-simple-api
+    state: started
+    restart_policy: always
+    networks:
+      - name: app-network
+    env:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://database:5432/db"
+      SPRING_DATASOURCE_USERNAME: "usr"
+      SPRING_DATASOURCE_PASSWORD: "pwd"
+  vars:
+    ansible_python_interpreter: /opt/docker_venv/bin/python

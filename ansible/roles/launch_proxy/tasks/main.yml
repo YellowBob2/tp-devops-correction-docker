@@ -1,0 +1,12 @@
+- name: Launch proxy container
+  docker_container:
+    name: httpd
+    image: yellowbobby/tp-devops-httpd
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+    networks:
+      - name: app-network
+  vars:
+    ansible_python_interpreter: /opt/docker_venv/bin/python
