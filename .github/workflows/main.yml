@@ -81,6 +81,10 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 400 ~/.ssh/id_rsa
           ssh-keyscan -H nino.sportes.takima.school >> ~/.ssh/known_hosts
+          echo "Host nino.sportes.takima.school
+            IdentityFile ~/.ssh/id_rsa
+            User admin" > ~/.ssh/config
+          chmod 400 ~/.ssh/config
 
       - name: Run Ansible playbook
         run: ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
