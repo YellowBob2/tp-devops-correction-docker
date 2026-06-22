@@ -25,7 +25,7 @@ jobs:
           -Dsonar.projectKey=tp-devops-correction-docker
           -Dsonar.organization=yellowbob2
           -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         working-directory: ./simple-api
 
 
