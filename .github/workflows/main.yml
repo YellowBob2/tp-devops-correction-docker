@@ -79,12 +79,8 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
           ssh-keyscan -H nino.sportes.takima.school >> ~/.ssh/known_hosts
-      - name: Debug SSH
-        run: |
-          ls -la ~/.ssh/
-          cat ~/.ssh/id_rsa | head -1
 
       - name: Run Ansible playbook
         run: ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
