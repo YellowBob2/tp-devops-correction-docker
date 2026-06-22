@@ -28,10 +28,27 @@ jobs:
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         working-directory: ./simple-api
 
+  test-frontend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '12'
+          
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./http-server/devops-front-main
+        
+      - name: Lint frontend
+        run: npm run lint
+        working-directory: ./http-server/devops-front-main
 
   # define job to build and publish docker image
   build-and-push-docker-image:
-    needs: test-backend
+    needs: [test-backend, test-frontend]
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-24.04
 
